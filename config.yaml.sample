@@ -1,0 +1,10 @@
+ListenPort: 1200
+HttpProxy: http://127.0.0.1:10809
+RSSInfos:
+  pixiv_month:
+    RSSUrl: https://rsshub.app/pixiv/ranking/month
+  pixiv_day_male:
+    RSSUrl: https://rsshub.app/pixiv/ranking/day_male
+  instagram_fjamie013:
+    RSSUrl: https://rsshub.app/instagram/user/fjamie013
+
