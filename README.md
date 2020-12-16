@@ -63,3 +63,12 @@ RSSInfos:
 * http://127.0.0.1:1200/pixiv/month
 * http://127.0.0.1:1200/pixiv/day_male
 * http://127.0.0.1:1200/instagram/fjamie013
+
+## TTRSS 可能遇到的问题
+
+如果你用的 TTRSS 是2020年12月左右的（个人最近才更新过一次），你可能会发现 TTRSS 无法订阅 80、433 以外的 RSS 源。启动 TTRSS docker 的时候添加以下环境即可：
+
+```yaml
+    environment:
+      - ALLOW_PORTS=1200
+```
