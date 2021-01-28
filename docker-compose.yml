@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   rssproxy:
-    image: 192.168.50.135:4567/homelab/rssproxy:latest
+    image: allanpk716/rssproxy:latest
     volumes:
       - /mnt/user/appdata/rssproxy/config.yaml:/app/config.yaml
     ports:
