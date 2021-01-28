@@ -8,29 +8,52 @@
 
 还有一点，RSSHUB 提供的某些网站的订阅是需要登录的，但是近期已经无法正常登录了，对应提供的方法也无效，所以还是得去 RSSHUB 上直接订阅，那么 RSSHUB 已经不能正常访问，所以你懂的。
 
+## 特性
+
+* 支持设置代理（强制）
+* 支持 instagram 订阅用户的 RSS
+* 支持 twitter 订阅用户的 RSS
+* 支持中转 rsshub （完全转发）
+
 ## 如何使用
 
 ### 编译主程序
 
 ```bash
-go build Main.go
+go build .
 ```
 
 ### 修改配置文件
+
+注意，启动后再修改配置文件，会自动触发重载逻辑，便于更新关注的列表，或者是用户名密码什么的。
 
 修改 config.yaml.sample 为 config.yaml，确保与主程序在同一级目录
 
 ```yaml
 ListenPort: 1200
 HttpProxy: http://127.0.0.1:10809
+EveryTime: 30m
+
 RSSInfos:
-  pixiv_month:
-    RSSUrl: https://rsshub.app/pixiv/ranking/month
-  pixiv_day_male:
-    RSSUrl: https://rsshub.app/pixiv/ranking/day_male
-  instagram_fjamie013:
-    RSSUrl: https://rsshub.app/instagram/user/fjamie013
+  pixiv_week_r18: https://rsshub.app/pixiv/ranking/week_r18
+  pixiv_day_male: https://rsshub.app/pixiv/ranking/day_male
+  
+ IGInfo:
+  UserName: username
+  PassWord: password
+  FeedMaxItems: 30
+  InstagramUsers:
+    - fjamie013
+    
+ TwiInfo:
+  FeedMaxItems: 200
+  ExcludeReplies: true
+  PhotoOnly: true
+  TwitterUsers:
+    - baby_eiss
 ```
+
+看上面示例哈。做了一个缓存 EveryTime 是 cron 的定时刷新时间，默认 30min。
 
 #### ListenPort
 
@@ -42,27 +65,42 @@ RSSInfos:
 
 #### RSSInfos
 
-这里支持多个需要中转的 RSS 源，有一定 Key 命名要求，以上述配置举例。
+看上面的示例哈
 
-有以下三个 Key，且会配合 RSSHUB 来使用，所以会以 "\_" 来分割，且只分割第一个 "\_"，slice[0] 是目标源网站的描述， slice[1] 则是具体的订阅路由，然后自动构建路由。
+> http://127.0.0.1:1200/rss/?key=pixiv_day_male		-- https://rsshub.app/pixiv/ranking/day_male
+>
+> http://127.0.0.1:1200/rss/?key=pixiv_month			  -- https://rsshub.app/pixiv/ranking/month
 
-* pixiv_month
-  *  slice[0] = pixiv , slice[1] = month
-  * 订阅地址：http://127.0.0.1:1200/pixiv/month
-* pixiv_day_male
-  *  slice[0] = pixiv , slice[1] = day_male
-  * 订阅地址：http://127.0.0.1:1200/pixiv/day_male
-* instagram_fjamie013
-  *  slice[0] = pixiv , slice[1] = day_male
-  * 订阅地址：http://127.0.0.1:1200/instagram/fjamie013
+#### IGInfo
 
-### 使用其他 RSS 软件订阅中转后的 RSS 源
+看上面的示例哈
 
-如上所述，直接运行主程序，那么对应的三个订阅地址则是：
+> http://127.0.0.1:1200/rss/instagram/?key=fjamie013			  -- https://www.instagram.com/fjamie013
 
-* http://127.0.0.1:1200/pixiv/month
-* http://127.0.0.1:1200/pixiv/day_male
-* http://127.0.0.1:1200/instagram/fjamie013
+#### TwiInfo
+
+ExcludeReplies: 跳过回复
+
+看上面的示例哈
+
+> http://127.0.0.1:1200/rss/twitter/?key=baby_eiss			  -- https://twitter.com/baby_eiss
+
+### Docker 部署
+
+参考项目内的 docker-compose 即可。需要注意的是，如果使用 docker 来部署，本程序的 config 文件中的端口号记得不要改，默认就是 1200，然后容器外面是啥你再定。
+
+```yaml
+version: '3.0'
+
+services:
+  rssproxy:
+    image: 192.168.50.135:4567/homelab/rssproxy:latest
+    volumes:
+      - /mnt/user/appdata/rssproxy/config.yaml:/app/config.yaml
+    ports:
+      - 1201:1200
+    restart: always
+```
 
 ## TTRSS 可能遇到的问题
 
@@ -72,3 +110,11 @@ RSSInfos:
     environment:
       - ALLOW_PORTS=1200
 ```
+
+## 致谢
+
+感谢下列项目的 Instagram 的相关代码，抄的很开心
+
+* [instafeed](https://github.com/falzm/instafeed)
+* [goinsta](https://github.com/ahmdrz/goinsta)
+* [twitter2rss](https://github.com/n0madic/twitter2rss)

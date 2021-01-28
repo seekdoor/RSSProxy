@@ -1,10 +1,21 @@
 ListenPort: 1200
 HttpProxy: http://127.0.0.1:10809
-RSSInfos:
-  pixiv_month:
-    RSSUrl: https://rsshub.app/pixiv/ranking/month
-  pixiv_day_male:
-    RSSUrl: https://rsshub.app/pixiv/ranking/day_male
-  instagram_fjamie013:
-    RSSUrl: https://rsshub.app/instagram/user/fjamie013
+EveryTime: 30m
 
+RSSInfos:
+  pixiv_week_r18: https://rsshub.app/pixiv/ranking/week_r18
+  pixiv_day_male: https://rsshub.app/pixiv/ranking/day_male
+
+IGInfo:
+  UserName: username
+  PassWord: password
+  FeedMaxItems: 30
+  InstagramUsers:
+    - fjamie013
+
+TwiInfo:
+  FeedMaxItems: 200
+  ExcludeReplies: true
+  PhotoOnly: true
+  TwitterUsers:
+    - baby_eiss

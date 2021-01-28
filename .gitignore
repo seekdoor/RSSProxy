@@ -1,3 +1,6 @@
 /Logs
 /config.yaml
 /.idea
+/igCache
+/rssproxy.exe
+dist

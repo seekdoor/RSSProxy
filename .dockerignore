@@ -1,0 +1,5 @@
+**/.dockerignore
+**/Dockerfile*
+!/Logs/
+/config.yaml
+/.gitignore
