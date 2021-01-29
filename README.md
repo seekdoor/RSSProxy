@@ -67,15 +67,15 @@ RSSInfos:
 
 看上面的示例哈
 
-> http://127.0.0.1:1200/rss/?key=pixiv_day_male		-- https://rsshub.app/pixiv/ranking/day_male
+> http://127.0.0.1:1200/rss?key=pixiv_day_male		-- https://rsshub.app/pixiv/ranking/day_male
 >
-> http://127.0.0.1:1200/rss/?key=pixiv_month			  -- https://rsshub.app/pixiv/ranking/month
+> http://127.0.0.1:1200/rss?key=pixiv_month			  -- https://rsshub.app/pixiv/ranking/month
 
 #### IGInfo
 
 看上面的示例哈
 
-> http://127.0.0.1:1200/rss/instagram/?key=fjamie013			  -- https://www.instagram.com/fjamie013
+> http://127.0.0.1:1200/rss/instagram?key=fjamie013			  -- https://www.instagram.com/fjamie013
 
 #### TwiInfo
 
@@ -83,7 +83,7 @@ ExcludeReplies: 跳过回复
 
 看上面的示例哈
 
-> http://127.0.0.1:1200/rss/twitter/?key=baby_eiss			  -- https://twitter.com/baby_eiss
+> http://127.0.0.1:1200/rss/twitter?key=baby_eiss			  -- https://twitter.com/baby_eiss
 
 ### Docker 部署
 
