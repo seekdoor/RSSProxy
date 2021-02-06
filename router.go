@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/allanpk716/rssproxy/NormalRSSHelper"
 	"github.com/gin-gonic/gin"
-	"homelab/rssproxy/NormalRSSHelper"
 	"net/http"
 )
 

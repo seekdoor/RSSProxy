@@ -1,8 +1,8 @@
 package main
 
 import (
-	"homelab/rssproxy/InstagramRSS"
-	"homelab/rssproxy/TwitterRSS"
+	"github.com/allanpk716/rssproxy/InstagramRSS"
+	"github.com/allanpk716/rssproxy/TwitterRSS"
 	"os"
 	"sync"
 )
