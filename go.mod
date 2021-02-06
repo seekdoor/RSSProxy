@@ -1,4 +1,4 @@
-module homelab/rssproxy
+module github.com/allanpk716/rssproxy
 
 go 1.14
 
